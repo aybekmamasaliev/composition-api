@@ -1,10 +1,42 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+  <div class="home">
+    <nav>
+      <router-link to="/">1</router-link> |
+      <router-link to="/second">2</router-link>
+    </nav>
+    <h1>Home</h1>
+    <h2>Refs</h2>
+    <p>{{ninjaOne.name}} - {{ninjaOne.age}}</p>
+    <p>{{ninjaTwo.name}} - {{ninjaTwo.age}}</p>
+    <p>{{nameone}}</p>
+    <p>{{nametwo}}</p>
+    <button @click="updateNinjaOne">Update</button>
+    <button @click="updateNinjaTwo">Update</button>
+  </div>
+  <router-view />
 </template>
+
+<script>
+
+import { ref, reactive } from "vue"
+export default {
+  name: "Home",
+  setup() {
+    const ninjaOne = ref({name:"Marios", age:30})
+    const ninjaTwo = reactive({name:"Luigi", age:33})
+    const updateNinjaOne=()=>{
+      ninjaOne.value.age = 40
+      ninjaOne.value.name = "shaun"
+    }
+
+    const updateNinjaTwo=()=>{
+      ninjaTwo.age = 40
+      ninjaTwo.name = "shaun"
+    }
+    return { ninjaOne, ninjaTwo, updateNinjaOne, updateNinjaTwo}
+  }
+}
+</script>
 
 <style>
 #app {
@@ -15,16 +47,7 @@
   color: #2c3e50;
 }
 
-nav {
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
+.test {
+  color: red;
 }
 </style>
